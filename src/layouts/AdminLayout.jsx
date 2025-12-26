@@ -10,7 +10,7 @@ import AdminModalComponent from "../components/admin/AdminModalComponent";
 import AdminSearchFormComponent from "../components/admin/AdminSearchFormComponent";
 import AdminDeleteViewComponent from "../components/admin/AdminDeleteViewComponent";
 import AdminDetailViewComponent from "../components/admin/AdminDetailViewComponent";
-
+import React from "react";
 const AdminLayout = ({ config }) => {
   // 데이터 가져오기
   const {

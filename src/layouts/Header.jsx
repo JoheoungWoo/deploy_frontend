@@ -35,7 +35,7 @@ const Header = () => {
             <img src={logo} alt="로고" className="h-10" />
           </button>
 
-          <div><a href="http://localhost:3001">{user.role}</a></div>
+          <div><a href="https://www.unlimitedjo.store">{user.role}</a></div>
 
           {/* 로그인 / 회원가입 */}
           <div className="flex items-center gap-4">
