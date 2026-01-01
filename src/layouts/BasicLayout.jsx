@@ -6,7 +6,7 @@ import LogoLayout from "./LogoLayout";
 import Navbar from "./Navbar";
 import Logo from "../images/university.jpg";
 
-const BasicLayout = ({ children }) => {
+const Basiclayout = ({ children }) => {
   const datas = {
     aboutGreen: {
       campusguide: "aboutgreen/campusguide",
@@ -57,4 +57,4 @@ const BasicLayout = ({ children }) => {
   );
 };
 
-export default BasicLayout;
+export default Basiclayout;
