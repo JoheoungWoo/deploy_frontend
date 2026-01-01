@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 
-import Basiclayout from "../layouts/Basiclayout";
+import BasicLayout from "../layouts/BasicLayout";
 import aboutGreenRouter from "./aboutGreenRouter";
 import academicSupportRouter from "./academicSupportRouter";
 import admissionEducationRouter from "./admissionEducationRouter";
@@ -19,7 +19,7 @@ const root = createBrowserRouter([
     path: "/",
     element: (
       <Suspense fallback={Loading}>
-        <Basiclayout children={<Main />}></Basiclayout>
+        <BasicLayout children={<Main />}></BasicLayout>
       </Suspense>
     ),
   },
