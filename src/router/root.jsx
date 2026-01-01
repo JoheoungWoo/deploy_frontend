@@ -9,7 +9,7 @@ import informationRouter from "./informationRouter";
 import accountRouter from "./accountRouter";
 import adminRouter from "./adminRouter";
 
-const { createBrowserRouter } = require("react-router-dom");
+import { createBrowserRouter } from "react-router-dom";
 const Loading = <div>Loading......</div>;
 
 const Main = lazy(() => import("../pages/MainPage"));
