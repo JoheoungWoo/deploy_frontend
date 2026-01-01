@@ -1,3 +1,5 @@
+import React from "react";
+
 // h1 ~ h3 전용 타이틀 (div 고정, level별 기본 size + className 덮어쓰기)
 const makeCommonHeading = (text, level, sizeClass) => {
   const baseClass = "text-gray-900";

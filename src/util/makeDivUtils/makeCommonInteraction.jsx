@@ -1,4 +1,6 @@
-const makeCommonAccordion  = (row = {}, columns = [], details = []) => {
+import React from "react";
+
+const makeCommonAccordion = (row = {}, columns = [], details = []) => {
   return (
     <>
       <details>
@@ -14,7 +16,7 @@ const makeCommonAccordion  = (row = {}, columns = [], details = []) => {
   );
 };
 
-const makeCommonPagination  = (pages = []) => {
+const makeCommonPagination = (pages = []) => {
   return (
     <div style={{ display: "flex" }}>
       <div>처음으로</div>
@@ -30,5 +32,4 @@ const makeCommonPagination  = (pages = []) => {
   );
 };
 
-
-export { makeCommonAccordion , makeCommonPagination  };
+export { makeCommonAccordion, makeCommonPagination };

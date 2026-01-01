@@ -1,4 +1,6 @@
-import { makeDefaultLI } from "./makeCommonList";
+import React from "react";
+
+// import { makeDefaultLI } from "./makeCommonList";
 
 // 라벨링, 여러개 묶어서 출력 (made by 김유라)
 // const makePrivacyLabelItem = (image, label = "", contents = []) => {

@@ -1,4 +1,6 @@
 // util/makeDivUtils/makeForced.js
+import React from "react";
+
 import { makeCommonHeading } from "./makeCommonText";
 import { makeCommonLabel, makeCommonImage } from "./makeCommonMedia";
 

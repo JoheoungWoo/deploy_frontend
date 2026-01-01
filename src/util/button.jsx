@@ -1,4 +1,6 @@
-export const createButton = ({ label, style, onClick, size="90%" }) => (
+import React from "react";
+
+export const createButton = ({ label, style, onClick, size = "90%" }) => (
   <button
     onClick={onClick}
     style={{ width: size }}
