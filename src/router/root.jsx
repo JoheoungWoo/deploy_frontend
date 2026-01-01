@@ -54,12 +54,11 @@ const root = createBrowserRouter([
     // element: <Suspense fallback={Loading}><Basiclayout children={<Main />}></Basiclayout></Suspense>,
     children: accountRouter(),
   },
-    {
+  {
     path: "admin",
     // element: <Suspense fallback={Loading}><Basiclayout children={<Main />}></Basiclayout></Suspense>,
     children: adminRouter(),
   },
-  
 ]);
 
 export default root;
