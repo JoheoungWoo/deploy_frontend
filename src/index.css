@@ -1,3 +1,125 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes dotWaveSoftLoop {
+  0% {
+    transform: translate(0px, 0px);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.6;
+  }
+
+  20% {
+    transform: translate(80px, -6px);
+  }
+
+  35% {
+    transform: translate(160px, 4px);
+  }
+
+  50% {
+    transform: translate(240px, -6px);
+  }
+
+  65% {
+    transform: translate(320px, 4px);
+  }
+
+  80% {
+    transform: translate(400px, -2px);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translate(460px, 0px);
+    opacity: 0;
+  }
+}
+
+.dot-wave-soft {
+  animation: dotWaveSoftLoop 6s linear infinite;
+}
+
+@keyframes collideLeft {
+  0% {
+    transform: translateX(-180px);
+    opacity: 0;
+  }
+
+  50% {
+    transform: translateX(40px); /* 중앙을 강하게 넘김 */
+    opacity: 1;
+  }
+
+  65% {
+    transform: translateX(-30px); /* 강한 반동 */
+  }
+
+  80% {
+    transform: translateX(12px); /* 잔반동 */
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes collideRight {
+  0% {
+    transform: translateX(180px);
+    opacity: 0;
+  }
+
+  50% {
+    transform: translateX(-40px); /* 중앙 넘김 */
+    opacity: 1;
+  }
+
+  65% {
+    transform: translateX(30px); /* 반동 */
+  }
+
+  80% {
+    transform: translateX(-12px); /* 잔반동 */
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.text-collide-left {
+  animation: collideLeft 1.8s cubic-bezier(0.22, 1.61, 0.36, 1) forwards;
+}
+
+.text-collide-right {
+  animation: collideRight 1.8s cubic-bezier(0.22, 1.61, 0.36, 1) forwards;
+}
+
+@keyframes flipDown {
+  0% {
+    opacity: 0;
+    transform: perspective(600px) rotateX(90deg) translateY(-20px);
+  }
+  60% {
+    opacity: 1;
+    transform: perspective(600px) rotateX(-10deg) translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(600px) rotateX(0deg) translateY(0);
+  }
+}
+
+.flip-card {
+  animation: flipDown 0.9s ease-out forwards;
+}
+
+
+
+
+
+

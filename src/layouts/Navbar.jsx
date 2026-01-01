@@ -5,10 +5,7 @@ const menuData = [
     title: "그린소개",
     items: [
       { label: "총장실", link: "/aboutgreen/president" },
-      { label: "그린비전", link: "/aboutgreen/greenvision" },
-      { label: "그린연혁", link: "/aboutgreen/historyofgreen" },
       { label: "대학현황", link: "/aboutgreen/universityoverview" },
-      { label: "그린상징", link: "/aboutgreen/universitysymbols" },
       { label: "캠퍼스 안내", link: "/aboutgreen/campusguide" },
     ],
   },
@@ -58,15 +55,11 @@ const menuData = [
       { label: "사이트맵", link: "/information/sitemap" },
       { label: "FAQ", link: "/information/faq" },
       { label: "채용안내", link: "/information/careers" },
-      { label: "개인정보보호방침", link: "/information/privacypolicy" },
-      { label: "법적고지", link: "/information/legalnotice" },
     ],
   },
   {
     title: "번외 서비스",
     items: [
-      { label: "후원하기", link: "/extraservices/donate" },
-      { label: "챗봇", link: "/extraservices/chatbot" },
       { label: "관리자 혹은 실험실", link: "/admin/one" },
     ],
   },

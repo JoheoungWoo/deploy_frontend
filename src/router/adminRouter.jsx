@@ -1,18 +1,20 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense } from 'react'
+import BasicLayout from '../layouts/Basiclayout';
 
-const Loading = <div>Loading...</div>;
-
+const Loading = <div>Loading......</div>;
 const AdminOne = lazy(() => import("../pages/admin/AdminOnePage"));
 
-const adminRouter = () => [
-  {
-    path: "one",
-    element: (
-      <Suspense fallback={Loading}>
-        <AdminOne />
-      </Suspense>
-    ),
-  },
-];
+const adminRouter = () => {
+  return [
+    // {
+    //     path:"",
+    //     element:<Navigate replace to="campusguide" />   
+    // }, 
+    {
+        path:"one",
+        element:<Suspense fallback={Loading}><BasicLayout children={<AdminOne />}/></Suspense>
+    },
+  ]
+}
 
 export default adminRouter;

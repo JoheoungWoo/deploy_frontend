@@ -1,9 +1,6 @@
-import React, { lazy, Suspense } from "react";
-import { createBrowserRouter } from "react-router-dom";
+import { lazy, Suspense } from "react";
 
-import BasicLayout from "../layouts/BasicLayout";
-import AdminLayout from "../layouts/AdminLayout"; // ⭐ 추가
-
+import Basiclayout from "../layouts/Basiclayout";
 import aboutGreenRouter from "./aboutGreenRouter";
 import academicSupportRouter from "./academicSupportRouter";
 import admissionEducationRouter from "./admissionEducationRouter";
@@ -12,9 +9,9 @@ import informationRouter from "./informationRouter";
 import accountRouter from "./accountRouter";
 import adminRouter from "./adminRouter";
 
+const { createBrowserRouter } = require("react-router-dom");
 const Loading = <div>Loading......</div>;
 
-// Lazy pages
 const Main = lazy(() => import("../pages/MainPage"));
 
 const root = createBrowserRouter([
@@ -22,66 +19,47 @@ const root = createBrowserRouter([
     path: "/",
     element: (
       <Suspense fallback={Loading}>
-        <BasicLayout />
+        <Basiclayout children={<Main />}></Basiclayout>
       </Suspense>
     ),
-    children: [
-      {
-        index: true,
-        element: (
-          <Suspense fallback={Loading}>
-            <Main />
-          </Suspense>
-        ),
-      },
-
-      // 🌱 About Green
-      {
-        path: "aboutgreen",
-        children: aboutGreenRouter(),
-      },
-
-      // 🎓 Academic Support
-      {
-        path: "academicsupport",
-        children: academicSupportRouter(),
-      },
-
-      // 📝 Admission Education
-      {
-        path: "admissioneducation",
-        children: admissionEducationRouter(),
-      },
-
-      // 🏫 Campus Life
-      {
-        path: "campuslife",
-        children: campusLifeRouter(),
-      },
-
-      // ℹ️ Information
-      {
-        path: "information",
-        children: informationRouter(),
-      },
-
-      // 👤 Account
-      {
-        path: "account",
-        children: accountRouter(),
-      },
-    ],
   },
-  // ⭐ Admin은 별도 라우트로 분리
   {
-    path: "/admin",
-    element: (
-      <Suspense fallback={Loading}>
-        <AdminLayout />
-      </Suspense>
-    ),
+    path: "aboutgreen",
+    // element: <Suspense fallback={Loading}><Basiclayout children={<Main />}></Basiclayout></Suspense>,
+    // element: <Suspense fallback={Loading}><Main /></Suspense>,
+    children: aboutGreenRouter(),
+  },
+  {
+    path: "academicsupport",
+    // element: <Suspense fallback={Loading}><Basiclayout children={<Main />}></Basiclayout></Suspense>,
+    children: academicSupportRouter(),
+  },
+  {
+    path: "admissioneducation",
+    // element: <Suspense fallback={Loading}><Basiclayout children={<Main />}></Basiclayout></Suspense>,
+    children: admissionEducationRouter(),
+  },
+  {
+    path: "campuslife",
+    // element: <Suspense fallback={Loading}><Basiclayout children={<Main />}></Basiclayout></Suspense>,
+    children: campusLifeRouter(),
+  },
+  {
+    path: "information",
+    // element: <Suspense fallback={Loading}><Basiclayout children={<Main />}></Basiclayout></Suspense>,
+    children: informationRouter(),
+  },
+  {
+    path: "account",
+    // element: <Suspense fallback={Loading}><Basiclayout children={<Main />}></Basiclayout></Suspense>,
+    children: accountRouter(),
+  },
+    {
+    path: "admin",
+    // element: <Suspense fallback={Loading}><Basiclayout children={<Main />}></Basiclayout></Suspense>,
     children: adminRouter(),
   },
+  
 ]);
 
 export default root;

@@ -1,8 +1,11 @@
 import axios from "axios";
-import { API_SERVER_HOST, typeEnum } from "./commonApi";
-import { createTableConfig, excludeColumns } from "./commonApi";
-import DepartmentApi from "./DepartmentApi";
+import {
+  createTableConfig,
+  API_SERVER_HOST,
+  sendAuthRequest,
+} from "./commonApi";
 import { tableDefinitions } from "./tablesConfig";
+import DepartmentApi from "./DepartmentApi";
 
 const host = `${API_SERVER_HOST}/api/user`;
 const tableName = "user";
@@ -31,15 +34,7 @@ export const doRegister = async (a) => {
   }
 };
 
-const findByKeyword = async () => {
-  console.log("User findByKeyword");
-}
-
-
-const extraButtons =
-  [
-
-  ];
+const extraButtons = [];
 
 var tableDefinition = tableDefinitions[tableName];
 tableDefinition = {
@@ -47,13 +42,20 @@ tableDefinition = {
   allColumns: {
     ...tableDefinition.allColumns,
     searchColumns: {
-      "one": tableDefinition.allColumns.responseColumns,
-      "role" : tableDefinition.allColumns.responseColumns
-    }
-  }
-}
+      one: tableDefinition.allColumns.responseColumns,
+      // role: tableDefinition.allColumns.responseColumns,
+    },
+  },
+};
 const config = createTableConfig(tableDefinition, extraButtons);
 
+const changePassword = (password, userEmail) => {
+  return sendAuthRequest(
+    "post",
+    `${API_SERVER_HOST}/api/${tableName}/change`,
+    userEmail,
+    { email: userEmail, password: password }
+  );
+};
 
-
-export default { config };
+export default { config, changePassword };
