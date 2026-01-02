@@ -7,13 +7,13 @@ const LogoLayout = () => {
   return (
     <div className="w-full overflow-hidden h-screen grid place-items-center bg-white">
       <div className="relative w-[50%] aspect-square">
-        <a href="http://localhost:3000">
-        {/* 가운데 로고: 기존처럼 rotate */}
-        <img
-          src={Logo2}
-          alt="그린로고"
-          className="w-full h-full rounded-full object-cover block z-10 reveal-ccw"
-        />
+        <a href="https://vercel-lms-frontend.vercel.app/">
+          {/* 가운데 로고: 기존처럼 rotate */}
+          <img
+            src={Logo2}
+            alt="그린로고"
+            className="w-full h-full rounded-full object-cover block z-10 reveal-ccw"
+          />
         </a>
 
         {/* 로고 주변 반대 방향으로 도는 텍스트 링 */}

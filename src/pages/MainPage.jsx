@@ -84,7 +84,7 @@ const MainPage = () => {
     <div className="min-h-screen">
       {/* Logo */}
       <div className="bg-white">
-        <a href="http://localhost:3000">
+        <a href="https://vercel-lms-frontend.vercel.app/">
           <LogoLayout />
         </a>
       </div>
