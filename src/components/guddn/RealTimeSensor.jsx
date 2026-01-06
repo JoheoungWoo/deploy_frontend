@@ -30,6 +30,7 @@ export default function RealTimeSensor() {
 
     client.on("message", (topic, message) => {
       try {
+        console.log(message);
         const msg = JSON.parse(message.toString()); // Arduino에서 JSON 문자열로 보내는 경우
         msg.created_at = new Date().toLocaleTimeString();
         setData((prev) => [...prev.slice(-49), msg]); // 최신 50개만 유지
