@@ -70,10 +70,15 @@ export default function ledPage() {
           type="range"
           min="0"
           max="255"
-          value={pwm}
-          onChange={handlePwmChange}
-          style={{ width: "100%" }}
+          onChange={(e) =>
+            client.publish(
+              "jaeseok/control",
+              JSON.stringify({ pwm: Number(e.target.value) }),
+              { qos: 1, retain: true }
+            )
+          }
         />
+        {/* 리액트의 input 태그에 적용 */}
       </div>
 
       <ResponsiveContainer width="100%" height={400}>
