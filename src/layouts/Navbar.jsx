@@ -61,6 +61,8 @@ const menuData = [
     title: "번외 서비스",
     items: [
       { label: "관리자 혹은 실험실", link: "/admin/one" },
+      { label: "실시간 가속도 정보", link: "/realTimesensor" },
+      { label: "LED 깜빡이기", link: "/led" },
     ],
   },
 ];
