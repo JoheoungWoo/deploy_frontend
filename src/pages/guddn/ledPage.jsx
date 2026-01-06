@@ -28,22 +28,28 @@ export default function ledPage() {
     clientRef.current = client;
 
     client.on("connect", () => {
-      console.log("MQTT connected");
+      console.log("✅ MQTT connected");
       client.subscribe("jaeseok/sensor");
     });
 
     client.on("message", (topic, message) => {
       if (topic === "jaeseok/sensor") {
-        const msg = JSON.parse(message.toString());
-        msg.created_at = new Date().toLocaleTimeString();
-        setData((prev) => [...prev.slice(-49), msg]);
+        try {
+          const msg = JSON.parse(message.toString());
+          msg.created_at = new Date().toLocaleTimeString();
+          setData((prev) => [...prev.slice(-49), msg]);
+        } catch (e) {
+          console.error("JSON parse error", e);
+        }
       }
     });
 
-    return () => client.end();
+    return () => {
+      client.end();
+    };
   }, []);
 
-  // 🔴 PWM 슬라이더 변경 시 publish
+  /* 🔴 PWM 슬라이더 핸들러 */
   const handlePwmChange = (e) => {
     const value = Number(e.target.value);
     setPwm(value);
@@ -70,15 +76,10 @@ export default function ledPage() {
           type="range"
           min="0"
           max="255"
-          onChange={(e) =>
-            client.publish(
-              "jaeseok/control",
-              JSON.stringify({ pwm: Number(e.target.value) }),
-              { qos: 1, retain: true }
-            )
-          }
+          value={pwm}
+          onChange={handlePwmChange}
+          style={{ width: "100%" }}
         />
-        {/* 리액트의 input 태그에 적용 */}
       </div>
 
       <ResponsiveContainer width="100%" height={400}>
