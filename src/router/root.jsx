@@ -10,6 +10,7 @@ import accountRouter from "./accountRouter";
 import adminRouter from "./adminRouter";
 
 import { createBrowserRouter } from "react-router-dom";
+import RealTimeSensor from "../components/guddn/RealTimeSensor";
 const Loading = <div>Loading......</div>;
 
 const Main = lazy(() => import("../pages/MainPage"));
@@ -58,6 +59,10 @@ const root = createBrowserRouter([
     path: "admin",
     // element: <Suspense fallback={Loading}><Basiclayout children={<Main />}></Basiclayout></Suspense>,
     children: adminRouter(),
+  },
+  {
+    path: "realTimeSensor",
+    element: <RealTimeSensor />,
   },
 ]);
 
