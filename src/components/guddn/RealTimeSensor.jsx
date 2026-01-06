@@ -25,7 +25,7 @@ export default function RealTimeSensor() {
 
     client.on("connect", () => {
       console.log("MQTT connected");
-      client.subscribe("jaeseok"); // Arduino에서 publish하는 토픽
+      client.subscribe("jaeseok/sensor"); // Arduino에서 publish하는 토픽
     });
 
     client.on("message", (topic, message) => {
