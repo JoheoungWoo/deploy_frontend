@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   LineChart,
   Line,
@@ -12,6 +12,7 @@ import mqtt from "mqtt";
 
 export default function ledPage() {
   const [data, setData] = useState([]);
+  const [pwm, setPwm] = useState(0);
   const clientRef = useRef(null);
 
   useEffect(() => {
@@ -20,6 +21,7 @@ export default function ledPage() {
       {
         username: "green1234",
         password: "green1234A",
+        clientId: "react-pwm-ui",
       }
     );
 
@@ -32,40 +34,47 @@ export default function ledPage() {
 
     client.on("message", (topic, message) => {
       if (topic === "jaeseok/sensor") {
-        try {
-          const msg = JSON.parse(message.toString());
-          msg.created_at = new Date().toLocaleTimeString();
-          setData((prev) => [...prev.slice(-49), msg]);
-        } catch (e) {
-          console.error(e);
-        }
+        const msg = JSON.parse(message.toString());
+        msg.created_at = new Date().toLocaleTimeString();
+        setData((prev) => [...prev.slice(-49), msg]);
       }
     });
 
     return () => client.end();
   }, []);
 
-  // 🔴 LED ON
-  const ledOn = () => {
-    clientRef.current.publish("jaeseok/control", JSON.stringify({ led: "on" }));
-  };
+  // 🔴 PWM 슬라이더 변경 시 publish
+  const handlePwmChange = (e) => {
+    const value = Number(e.target.value);
+    setPwm(value);
 
-  // ⚫ LED OFF
-  const ledOff = () => {
-    clientRef.current.publish(
-      "jaeseok/control",
-      JSON.stringify({ led: "off" })
-    );
+    if (clientRef.current?.connected) {
+      clientRef.current.publish(
+        "jaeseok/control",
+        JSON.stringify({ pwm: value }),
+        { qos: 1, retain: true }
+      );
+    }
   };
 
   return (
     <div style={{ padding: 20 }}>
       <h2>📡 MPU6050 Realtime Chart</h2>
 
-      <button onClick={ledOn}>LED ON</button>
-      <button onClick={ledOff} style={{ marginLeft: 10 }}>
-        LED OFF
-      </button>
+      {/* PWM Slider */}
+      <div style={{ margin: "20px 0" }}>
+        <label>
+          LED Brightness: <b>{pwm}</b>
+        </label>
+        <input
+          type="range"
+          min="0"
+          max="255"
+          value={pwm}
+          onChange={handlePwmChange}
+          style={{ width: "100%" }}
+        />
+      </div>
 
       <ResponsiveContainer width="100%" height={400}>
         <LineChart data={data}>
