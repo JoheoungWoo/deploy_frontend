@@ -16,9 +16,23 @@ const loadAccounterCookie = () => {
   return userInfo;
 };
 
+const loadUserFromStorage = () => {
+  try {
+    const userStr = localStorage.getItem("user");
+    if (userStr) {
+      const user = JSON.parse(userStr);
+      if (user.nickname) user.nickname = decodeURIComponent(user.nickname);
+      return user;
+    }
+  } catch (e) {
+    console.error("localStorage load error", e);
+  }
+  return initialState;
+};
+
 const loginSlice = createSlice({
   name: "loginSlice",
-  initialState: loadAccounterCookie() || initialState, //쿠키가 없다면 초기값 사용
+  initialState: loadUserFromStorage() || initialState, //쿠키가 없다면 초기값 사용
   reducers: {
     login: (state, action) => {
       console.log("login....");
