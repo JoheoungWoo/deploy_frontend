@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getCookie, removeCookie, setCookie } from "../util/cookieUtil";
-import { doLogin } from "../api/UserApi";
+import { doLogin } from "../api/userApi";
 
 // 기본 상태
 const initialState = {
