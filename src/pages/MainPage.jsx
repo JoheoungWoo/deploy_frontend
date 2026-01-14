@@ -85,7 +85,7 @@ const MainPage = () => {
     <div className="min-h-screen">
       {/* Logo */}
       <div className="bg-white">
-        {/* <a href="https://vercel-lms-frontend.vercel.app"> */}
+        {/* <a href="https://lms.greenunivercity.store/"> */}
         <LogoLayout />
         {/* </a> */}
       </div>

@@ -25,7 +25,7 @@ const Header = () => {
       <div className="w-full bg-sky-300 text-white shadow-md">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 h-16">
           {/* 🔹 LEFT: 로고 */}
-          <Link to={"https://vercel-lms-frontend.vercel.app"}>
+          <Link to={"https://lms.greenunivercity.store/"}>
             <button
               onClick={Home}
               className="flex items-center gap-2 hover:opacity-90"
