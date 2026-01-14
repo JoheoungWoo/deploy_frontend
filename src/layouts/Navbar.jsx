@@ -59,7 +59,11 @@ const menuData = [
   },
   {
     title: "번외 서비스",
-    items: [{ label: "관리자 혹은 실험실", link: "/admin/one" }],
+    items: [
+      { label: "관리자 혹은 실험실", link: "/admin/one" },
+      { label: "realTimeSensor용도 ", link: "/realTimeSensor" },
+      { label: "led깜빡이기", link: "/led" },
+    ],
   },
 ];
 
