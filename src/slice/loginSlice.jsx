@@ -6,7 +6,7 @@ import { doLogin } from "../api/userApi";
 const initialState = {
   email: "",
   nickname: "",
-  role: "GUEST",
+  role: "STUDENT",
 };
 
 /**
