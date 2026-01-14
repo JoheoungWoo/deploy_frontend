@@ -1,32 +1,43 @@
-import React, { lazy, Suspense } from 'react'
-import { Navigate } from 'react-router-dom';
-import BasicLayout from '../layouts/Basiclayout';
+import React, { lazy, Suspense } from "react";
+import { Navigate } from "react-router-dom";
+import BasicLayout from "../layouts/BasicLayout";
 
 const Loading = <div>Loading......</div>;
 const Careers = lazy(() => import("../pages/information/CareersPage"));
 const FAQ = lazy(() => import("../pages/information/FAQPage"));
 const Sitemap = lazy(() => import("../pages/information/SitemapPage"));
 
-
 const informationRouter = () => {
   return [
     {
-        path:"",
-        element:<Navigate replace to="campusGuidePage" />   
-    }, 
+      path: "",
+      element: <Navigate replace to="campusGuidePage" />,
+    },
     {
-        path:"careers",
-        element:<Suspense fallback={Loading}><BasicLayout children={<Careers />}/></Suspense>
+      path: "careers",
+      element: (
+        <Suspense fallback={Loading}>
+          <BasicLayout children={<Careers />} />
+        </Suspense>
+      ),
     },
-        {
-        path:"faq",
-        element:<Suspense fallback={Loading}><BasicLayout children={<FAQ />}/></Suspense>
+    {
+      path: "faq",
+      element: (
+        <Suspense fallback={Loading}>
+          <BasicLayout children={<FAQ />} />
+        </Suspense>
+      ),
     },
-        {
-        path:"sitemap",
-        element:<Suspense fallback={Loading}><BasicLayout children={<Sitemap />}/></Suspense>
+    {
+      path: "sitemap",
+      element: (
+        <Suspense fallback={Loading}>
+          <BasicLayout children={<Sitemap />} />
+        </Suspense>
+      ),
     },
-  ]
-}
+  ];
+};
 
 export default informationRouter;
