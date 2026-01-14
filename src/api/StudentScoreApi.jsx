@@ -1,21 +1,46 @@
-// src/api/StudentScoreApi.js
-import { createExtraApi, createTableConfig } from "./commonApi";
-import { tableDefinitions } from "./tablesConfig";
+import axios from "axios";
+import { API_SERVER_HOST, createCrudApi } from "./commonApi";
 
-const tableName = "studentScore"; // 백엔드 @RequestMapping("/api/student-scores")
-const tableDefinition = tableDefinitions[tableName];
-const config = createTableConfig(tableDefinition, []);
+const tableName = "student-scores";
 
-// 커스텀 함수: 특정 수강신청(Enrollment)의 점수 목록 조회
-config.funcs.findByEnrollment = async (enrollmentId) => {
-  // 백엔드 StudentScoreRepository.findByEnrollmentId 대응
-  // 백엔드 컨트롤러에 해당 엔드포인트가 없다면 /all 조회 후 필터링하거나 추가 필요
-  // 여기서는 commonApi의 findByKeyword를 활용하여 구현한다고 가정
-  // 또는 StudentScoreController의 getItemScores 등을 응용
+export const StudentScoreApi = {
+  // 기본 CRUD (createCrudApi 활용)
+  ...createCrudApi(tableName),
 
-  // *백엔드 StudentScoreController에 /enrollments/{enrollmentId} 가 있다고 가정*
-  // 없다면 commonApi의 findByKeyword('enrollment', enrollmentId) 사용
-  return config.funcs.findByKeyword("enrollments", enrollmentId);
+  // [커스텀] SS-4: 평가항목(itemId)별 학생 점수 조회
+  // 백엔드: GET /api/student-scores/items/{itemId}
+  getItemScores: async (itemId, professorEmail) => {
+    try {
+      const response = await axios.get(
+        `${API_SERVER_HOST}/api/${tableName}/items/${itemId}`,
+        {
+          headers: { "X-User-Email": professorEmail },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error(`[StudentScoreApi] getItemScores 에러:`, error);
+      return []; // 에러 시 빈 배열 반환
+    }
+  },
+
+  // [커스텀] SS-5: 점수 수정 (URL에 ID 포함)
+  // 백엔드: PUT /api/student-scores/{scoreId}
+  updateScore: async (scoreId, dto, professorEmail) => {
+    try {
+      const response = await axios.put(
+        `${API_SERVER_HOST}/api/${tableName}/${scoreId}`,
+        dto,
+        {
+          headers: { "X-User-Email": professorEmail },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error(`[StudentScoreApi] updateScore 에러:`, error);
+      throw error;
+    }
+  },
 };
 
-export default { config };
+export default StudentScoreApi;

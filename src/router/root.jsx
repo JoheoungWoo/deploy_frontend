@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 
-import BasicLayout from "../layouts/BasicLayout";
+import Basiclayout from "../layouts/Basiclayout";
 import aboutGreenRouter from "./aboutGreenRouter";
 import academicSupportRouter from "./academicSupportRouter";
 import admissionEducationRouter from "./admissionEducationRouter";
@@ -9,7 +9,7 @@ import informationRouter from "./informationRouter";
 import accountRouter from "./accountRouter";
 import adminRouter from "./adminRouter";
 
-import { createBrowserRouter } from "react-router-dom";
+const { createBrowserRouter } = require("react-router-dom");
 import RealTimeSensor from "../components/guddn/RealTimeSensor";
 import LedPage from "../pages/guddn/ledPage";
 const Loading = <div>Loading......</div>;
@@ -21,7 +21,7 @@ const root = createBrowserRouter([
     path: "/",
     element: (
       <Suspense fallback={Loading}>
-        <BasicLayout children={<Main />}></BasicLayout>
+        <Basiclayout children={<Main />}></Basiclayout>
       </Suspense>
     ),
   },
@@ -56,12 +56,12 @@ const root = createBrowserRouter([
     // element: <Suspense fallback={Loading}><Basiclayout children={<Main />}></Basiclayout></Suspense>,
     children: accountRouter(),
   },
-  {
+    {
     path: "admin",
     // element: <Suspense fallback={Loading}><Basiclayout children={<Main />}></Basiclayout></Suspense>,
     children: adminRouter(),
   },
-  {
+    {
     path: "realTimeSensor",
     element: <RealTimeSensor />,
   },

@@ -5,7 +5,6 @@ import {
   makeCommonTitle,
 } from "../../util/makeDivUtils/makeCommonText";
 import { makeCommonLabel } from "../../util/makeDivUtils/makeCommonMedia";
-import React from "react";
 
 const CampusGuideComponent = () => {
   const [mainContent] = useState(GreenGuide.mainContent);

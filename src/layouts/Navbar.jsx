@@ -59,17 +59,14 @@ const menuData = [
   },
   {
     title: "번외 서비스",
-    items: [
-      { label: "관리자 혹은 실험실", link: "/admin/one" },
-      { label: "실시간 가속도 정보", link: "/realTimesensor" },
-      { label: "LED 깜빡이기", link: "/led" },
-    ],
+    items: [{ label: "관리자 혹은 실험실", link: "/admin/one" }],
   },
 ];
 
-const Navbar = ({ open, setOpen }) => {
+const Navbar = ({ open, setOpen, role }) => {
   if (!open) return null;
 
+  console.log(role);
   return (
     <nav
       className="relative bg-sky-400/90 text-white"
@@ -90,23 +87,48 @@ const Navbar = ({ open, setOpen }) => {
 
       <div className="absolute left-0 w-full bg-sky-300/95 py-8 shadow-lg animate-fadeIn">
         <div className="max-w-7xl mx-auto grid grid-cols-6 gap-12 px-8 text-white">
-          {menuData.map((menu) => (
-            <div key={menu.title} className="flex flex-col gap-3">
-              <h3 className="font-bold text-lg">{menu.title}</h3>
-              <ul className="space-y-1 text-sm">
-                {menu.items.map((item) => (
-                  <li key={item.label}>
-                    <a
-                      href={item.link}
-                      className="block hover:underline whitespace-nowrap"
-                    >
-                      {item.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* 일반적인 경우에는, 마지막 카테고리는 비공개 */}
+          {role === "ADMIN" ? (
+            <>
+              {menuData.map((menu) => (
+                <div key={menu.title} className="flex flex-col gap-3">
+                  <h3 className="font-bold text-lg">{menu.title}</h3>
+                  <ul className="space-y-1 text-sm">
+                    {menu.items.map((item) => (
+                      <li key={item.label}>
+                        <a
+                          href={item.link}
+                          className="block hover:underline whitespace-nowrap"
+                        >
+                          {item.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </>
+          ) : (
+            <>
+              {menuData.slice(0, menuData.length - 1).map((menu) => (
+                <div key={menu.title} className="flex flex-col gap-3">
+                  <h3 className="font-bold text-lg">{menu.title}</h3>
+                  <ul className="space-y-1 text-sm">
+                    {menu.items.map((item) => (
+                      <li key={item.label}>
+                        <a
+                          href={item.link}
+                          className="block hover:underline whitespace-nowrap"
+                        >
+                          {item.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </>
+          )}
         </div>
       </div>
     </nav>

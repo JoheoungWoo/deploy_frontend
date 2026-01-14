@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { Navigate } from "react-router-dom";
-import BasicLayout from "../layouts/BasicLayout";
+import BasicLayout from "../layouts/Basiclayout";
 
 const Loading = <div>Loading......</div>;
 const CampusGuide = lazy(() => import("../pages/aboutGreen/CampusGuidePage"));

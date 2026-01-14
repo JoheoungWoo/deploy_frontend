@@ -25,6 +25,7 @@ const specialData = [
   { title: "SPECIAL 5", text: "다양한 국비지원\n교육과정 운영" },
   { title: "SPECIAL 6", text: "체계적인 취업지원\n프로그램 제공" },
   { title: "SPECIAL 7", text: "현장 중심 맞춤형\n전문 인재 양성" },
+  { title: "SPECIAL 8", text: "산업 트렌드를 반영한\n최신 커리큘럼 지속 개편" },
 ];
 
 const MainPage = () => {
@@ -84,9 +85,9 @@ const MainPage = () => {
     <div className="min-h-screen">
       {/* Logo */}
       <div className="bg-white">
-        <a href="https://vercel-lms-frontend.vercel.app/">
-          <LogoLayout />
-        </a>
+        {/* <a href="https://vercel-lms-frontend.vercel.app"> */}
+        <LogoLayout />
+        {/* </a> */}
       </div>
 
       {/* Content */}
@@ -166,35 +167,37 @@ const MainPage = () => {
         {/* 🔥 NEW SPECIAL BIG BOX */}
         <div
           ref={specialRef}
-          className="w-full min-h-screen flex bg-white px-12 py-20"
+          className="w-full min-h-screen bg-white px-12 py-20 flex justify-center"
         >
-          {/* LEFT 20% */}
-          <div className="w-[20%] space-y-6">
-            {specialData.map((item, idx) => (
-              <div
-                key={idx}
-                className={`bg-white border rounded-md p-4 shadow-sm opacity-0
-                  ${showSpecial ? "flip-card" : ""}`}
-                style={{ animationDelay: `${idx * 0.15}s` }}
-              >
-                <div className="text-xs font-bold text-green-700 mb-1">
-                  {item.title}
+          <div className="w-full grid grid-cols-[1fr_4fr] gap-12 items-stretch">
+            {/* LEFT 20% : 카드 영역 (이미지 높이에 맞춰 Y 정렬) */}
+            <div className="flex flex-col justify-center space-y-6">
+              {specialData.map((item, idx) => (
+                <div
+                  key={idx}
+                  className={`bg-white border rounded-md p-4 shadow-sm opacity-0
+            ${showSpecial ? "flip-card" : ""}`}
+                  style={{ animationDelay: `${idx * 0.15}s` }}
+                >
+                  <div className="text-xs font-bold text-green-700 mb-1">
+                    {item.title}
+                  </div>
+                  <div className="whitespace-pre-line text-gray-800 leading-relaxed text-sm">
+                    {item.text}
+                  </div>
                 </div>
-                <div className="whitespace-pre-line text-gray-800 leading-relaxed text-sm">
-                  {item.text}
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
 
-          {/* RIGHT 80% : IMAGE */}
-          <div className="w-[80%] flex items-center justify-center">
-            <div className="w-[85%] h-[75%] overflow-hidden rounded-lg shadow-md">
-              <img
-                src={collegeImg}
-                alt="College Campus"
-                className="w-full h-full object-cover"
-              />
+            {/* RIGHT 80% : IMAGE */}
+            <div className="flex items-center justify-center">
+              <div className="w-[85%] aspect-[16/9] overflow-hidden rounded-lg shadow-md">
+                <img
+                  src={collegeImg}
+                  alt="College Campus"
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>

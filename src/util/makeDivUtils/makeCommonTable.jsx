@@ -1,5 +1,4 @@
 // util/makeDivUtils/makeCommonTable.js
-import React from "react";
 
 const renderTableHeader = (headers = [], colStyles = []) => {
   return (

@@ -1,5 +1,3 @@
-import React from "react";
-
 // util/makeDivUtils/makeCommonForm.js
 
 const makeCommonButton = (label, onClick) => {

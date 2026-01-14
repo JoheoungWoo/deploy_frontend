@@ -19,8 +19,6 @@ import { AssignmentDef } from "./definitions/AssignmentDefinition";
 import { SubmissionDef } from "./definitions/SubmissionDefinition";
 import { SSHDef } from "./definitions/SSHistoryDefinition";
 import { TermDef } from "./definitions/TermDefinition";
-import { GradeItemDef } from "./definitions/GradeItemDefinition";
-import { StudentScoreDef } from "./definitions/StudentScoreDefinition";
 
 export const tableDefinitions = {
   assignment: AssignmentDef,
@@ -34,8 +32,6 @@ export const tableDefinitions = {
   department: DepartmentDef,
   enrollment: EnrollmentDef,
   grade: GradeDef,
-  gradeItem: GradeItemDef,
-  studentScore: StudentScoreDef,
   notice: NoticeDef,
   post: PostDef,
   review: ReviewDef,

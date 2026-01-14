@@ -1,5 +1,3 @@
-import React from "react";
-
 const makeCommonContainer = (lists, style = "") => {
   return (
     <>
@@ -8,9 +6,9 @@ const makeCommonContainer = (lists, style = "") => {
       ))}
     </>
   );
-};
+}
 
-const makeCommonTabItems = (tabs = [], style = "") => {
+const makeCommonTabItems =	(tabs = [], style = "") => {
   return (
     <>
       {tabs.map((tab, tabIdx) => (
@@ -19,7 +17,7 @@ const makeCommonTabItems = (tabs = [], style = "") => {
         </div>
       ))}
     </>
-  );
-};
+  )
+}
 
-export { makeCommonContainer, makeCommonTabItems };
+export {makeCommonContainer, makeCommonTabItems}

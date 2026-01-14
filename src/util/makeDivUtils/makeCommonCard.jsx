@@ -1,5 +1,3 @@
-import React from "react";
-
 // util/makeDivUtils/makeCommonCard.js
 
 const renderCardHeader = (

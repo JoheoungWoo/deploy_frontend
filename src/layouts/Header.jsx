@@ -5,57 +5,68 @@ import SignedLoginComponent from "../components/auth/SignedLoginComponent";
 import UnSignedLoginComponent from "../components/auth/UnSignedLoginComponent";
 import logo from "../images/1.png";
 import Navbar from "./Navbar";
-import FileAttachmentApi from "../api/FileAttachmentApi";
+import { TfiMenu } from "react-icons/tfi";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const { Home } = useNavigationTest();
   const user = useSelector((s) => s.loginSlice);
   const loginState = useSelector((state) => state.loginSlice);
 
-  // 🔹 Navbar 열림/닫힘 상태
   const [navOpen, setNavOpen] = useState(false);
 
-  const handleLogoClick = () => {
+  const toggleNav = () => {
     setNavOpen((prev) => !prev);
   };
 
   return (
-    // 헤더 전체를 sticky로
-    <div className="sticky top-0 z-[100] w-full">
-      {/* 🔹 1줄차 상단 바: 로고 + 로그인 */}
-      <div className="w-full bg-sky-300 text-white shadow-sm border-sky-400">
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-8">
-          {/* 로고 */}
-          <button
-            type="button"
-            onClick={handleLogoClick}
-            className="flex items-center gap-2"
-          >
-            <img src={logo} alt="로고" className="h-10" />
-          </button>
+    <header className="sticky top-0 z-[100] w-full">
+      {/* ===== 상단 헤더 ===== */}
+      <div className="w-full bg-sky-300 text-white shadow-md">
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 h-16">
+          {/* 🔹 LEFT: 로고 */}
+          <Link to={"https://vercel-lms-frontend.vercel.app"}>
+            <button
+              onClick={Home}
+              className="flex items-center gap-2 hover:opacity-90"
+            >
+              <img src={logo} alt="로고" className="h-9" />
+            </button>
+          </Link>
 
-          <div>
-            <a href="https://www.greenunivercity.store/">{user.role}</a>
-          </div>
+          {/* 🔹 CENTER: 메뉴 버튼 */}
+          {user.role !== "GUEST" && (
+            <button
+              onClick={toggleNav}
+              className="p-2 rounded-full hover:bg-white/20 transition"
+              aria-label="메뉴 열기"
+            >
+              그린대학교
+            </button>
+          )}
 
-          {/* 로그인 / 회원가입 */}
-          <div className="flex items-center gap-4">
-            {loginState.email ? (
+          {/* 🔹 RIGHT: 유저 / 로그인 */}
+          <div className="flex items-center gap-4 text-sm">
+            {loginState.email && (
+              <span className="hidden sm:block font-medium opacity-90">
+                {user.role}
+              </span>
+            )}
+
+            {/* {loginState.email ? (
               <SignedLoginComponent />
             ) : (
               <UnSignedLoginComponent />
-            )}
+            )} */}
           </div>
         </div>
       </div>
 
-      {/* 🔹 2줄차 네비게이션(사이트맵 스타일) */}
-      {user.role === "GUEST" ? (
-        <div />
-      ) : (
-        <Navbar open={navOpen} setOpen={setNavOpen} />
+      {/* ===== 네비게이션 ===== */}
+      {user.role !== "GUEST" && (
+        <Navbar open={navOpen} setOpen={setNavOpen} role={user.role} />
       )}
-    </div>
+    </header>
   );
 };
 
