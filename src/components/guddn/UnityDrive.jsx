@@ -1,17 +1,11 @@
-import React, { useState, useEffect } from "react";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
+import React, { useEffect, useRef, useState } from "react";
 import mqtt from "mqtt";
 
 export default function UnityDrive() {
-  const [data, setData] = useState([]);
+  const clientRef = useRef(null);
+
+  const [ay, setAy] = useState(0); // 가속
+  const [gy, setGy] = useState(0); // 조향
 
   useEffect(() => {
     const client = mqtt.connect(
@@ -22,51 +16,60 @@ export default function UnityDrive() {
       },
     );
 
+    clientRef.current = client;
+
     client.on("connect", () => {
-      client.subscribe("bus/sensor");
-    });
-
-    client.on("message", (topic, message) => {
-      try {
-        const raw = JSON.parse(message.toString());
-
-        const msg = {
-          created_at: new Date().toLocaleTimeString(),
-          ax: Number(raw.ax),
-          ay: Number(raw.ay),
-          az: Number(raw.az),
-          gx: Number(raw.gx),
-          gy: Number(raw.gy),
-          gz: Number(raw.gz),
-        };
-
-        setData((prev) => [...prev.slice(-49), msg]);
-      } catch (e) {
-        console.error(e);
-      }
+      console.log("MQTT Connected");
     });
 
     return () => client.end();
   }, []);
 
+  // 값 바뀔 때마다 publish
+  useEffect(() => {
+    if (!clientRef.current) return;
+
+    const payload = {
+      ax: 0,
+      ay: ay,
+      az: 0,
+      gx: 0,
+      gy: gy,
+      gz: 0,
+    };
+
+    clientRef.current.publish("bus/sensor", JSON.stringify(payload));
+  }, [ay, gy]);
+
   return (
     <div style={{ padding: 20 }}>
-      <ResponsiveContainer width="100%" height={400}>
-        <LineChart data={data}>
-          <XAxis dataKey="created_at" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
+      <h3>왼쪽: 가속 / 오른쪽: 방향</h3>
 
-          <Line dataKey="ax" stroke="#ff0000" dot={false} />
-          <Line dataKey="ay" stroke="#00ff00" dot={false} />
-          <Line dataKey="az" stroke="#0000ff" dot={false} />
+      {/* 가속 조이스틱 */}
+      <div>
+        <p>가속 (ay): {ay.toFixed(2)}</p>
+        <input
+          type="range"
+          min="-1"
+          max="1"
+          step="0.05"
+          value={ay}
+          onChange={(e) => setAy(Number(e.target.value))}
+        />
+      </div>
 
-          <Line dataKey="gx" stroke="#ff00ff" dot={false} />
-          <Line dataKey="gy" stroke="#00ffff" dot={false} />
-          <Line dataKey="gz" stroke="#ffa500" dot={false} />
-        </LineChart>
-      </ResponsiveContainer>
+      {/* 조향 조이스틱 */}
+      <div style={{ marginTop: 20 }}>
+        <p>조향 (gy): {gy.toFixed(2)}</p>
+        <input
+          type="range"
+          min="-1"
+          max="1"
+          step="0.05"
+          value={gy}
+          onChange={(e) => setGy(Number(e.target.value))}
+        />
+      </div>
     </div>
   );
 }
