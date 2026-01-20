@@ -23,18 +23,26 @@ export default function UnitySensor() {
     );
 
     client.on("connect", () => {
-      console.log("MQTT connected (bus/sensor)");
       client.subscribe("bus/sensor");
     });
 
     client.on("message", (topic, message) => {
       try {
-        const msg = JSON.parse(message.toString());
-        msg.created_at = new Date().toLocaleTimeString();
+        const raw = JSON.parse(message.toString());
+
+        const msg = {
+          created_at: new Date().toLocaleTimeString(),
+          ax: Number(raw.ax),
+          ay: Number(raw.ay),
+          az: Number(raw.az),
+          gx: Number(raw.gx),
+          gy: Number(raw.gy),
+          gz: Number(raw.gz),
+        };
 
         setData((prev) => [...prev.slice(-49), msg]);
       } catch (e) {
-        console.error("JSON parse error:", e);
+        console.error(e);
       }
     });
 
@@ -43,8 +51,6 @@ export default function UnitySensor() {
 
   return (
     <div style={{ padding: 20 }}>
-      <h2>📡 Unity Sensor (bus/sensor)</h2>
-
       <ResponsiveContainer width="100%" height={400}>
         <LineChart data={data}>
           <XAxis dataKey="created_at" />
@@ -52,51 +58,13 @@ export default function UnitySensor() {
           <Tooltip />
           <Legend />
 
-          {/* Acceleration */}
-          <Line
-            type="monotone"
-            dataKey="ax"
-            name="AX"
-            stroke="#ff0000"
-            dot={false}
-          />
-          <Line
-            type="monotone"
-            dataKey="ay"
-            name="AY"
-            stroke="#00ff00"
-            dot={false}
-          />
-          <Line
-            type="monotone"
-            dataKey="az"
-            name="AZ"
-            stroke="#0000ff"
-            dot={false}
-          />
+          <Line dataKey="ax" stroke="#ff0000" dot={false} />
+          <Line dataKey="ay" stroke="#00ff00" dot={false} />
+          <Line dataKey="az" stroke="#0000ff" dot={false} />
 
-          {/* Gyroscope */}
-          <Line
-            type="monotone"
-            dataKey="gx"
-            name="GX"
-            stroke="#ff00ff"
-            dot={false}
-          />
-          <Line
-            type="monotone"
-            dataKey="gy"
-            name="GY"
-            stroke="#00ffff"
-            dot={false}
-          />
-          <Line
-            type="monotone"
-            dataKey="gz"
-            name="GZ"
-            stroke="#ffa500"
-            dot={false}
-          />
+          <Line dataKey="gx" stroke="#ff00ff" dot={false} />
+          <Line dataKey="gy" stroke="#00ffff" dot={false} />
+          <Line dataKey="gz" stroke="#ffa500" dot={false} />
         </LineChart>
       </ResponsiveContainer>
     </div>
