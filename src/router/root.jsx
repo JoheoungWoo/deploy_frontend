@@ -12,6 +12,7 @@ import adminRouter from "./adminRouter";
 import RealTimeSensor from "../components/guddn/RealTimeSensor";
 import LedPage from "../pages/guddn/ledPage";
 import { createBrowserRouter } from "react-router-dom";
+import UnitySensor from "../components/guddn/UnitySensor";
 const Loading = <div>Loading......</div>;
 
 const Main = lazy(() => import("../pages/MainPage"));
@@ -64,6 +65,10 @@ const root = createBrowserRouter([
   {
     path: "realTimeSensor",
     element: <RealTimeSensor />,
+  },
+  {
+    path: "unitysensor",
+    element: <UnitySensor />,
   },
   {
     path: "led",

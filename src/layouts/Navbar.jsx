@@ -62,6 +62,7 @@ const menuData = [
     items: [
       { label: "관리자 혹은 실험실", link: "/admin/one" },
       { label: "realTimeSensor용도 ", link: "/realTimeSensor" },
+      { label: "unitySensor용도", link: "/unitysensor" },
       { label: "led깜빡이기", link: "/led" },
     ],
   },
